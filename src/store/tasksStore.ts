@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { z } from "zod";
 
 interface TaskContent {
   id: number;
@@ -6,7 +7,9 @@ interface TaskContent {
   description?: string | undefined;
 }
 
-export type TaskState = "todo" | "inProgress" | "inReview" | "done";
+export const taskStates = ["todo", "inProgress", "inReview", "done"] as const;
+export const zodTaskState = z.enum(taskStates);
+export type TaskState = z.infer<typeof zodTaskState>;
 
 interface TasksStoreState {
   tasks: Record<TaskState, TaskContent[]>;

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { NewTaskSheet } from "~/components/newTaskSheet";
 import { TaskColumn } from "~/components/taskColumn";
 
 export default function Home() {
@@ -11,6 +12,9 @@ export default function Home() {
       </Head>
       <main className="flex justify-center">
         <div className="p-4">
+          <div className="py-4">
+            <NewTaskSheet />
+          </div>
           <div className="flex flex-row gap-4">
             <TaskColumn title="Todo" taskState="todo" />
             <TaskColumn title="In Progress" taskState="inProgress" />
