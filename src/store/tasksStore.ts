@@ -12,10 +12,16 @@ export const zodTaskState = z.enum(taskStates);
 export type TaskState = z.infer<typeof zodTaskState>;
 
 interface TasksStoreState {
+  lastId: number;
   tasks: Record<TaskState, TaskContent[]>;
+  addNewTask: (
+    taskContent: Omit<TaskContent, "id">,
+    taskState: TaskState,
+  ) => void;
 }
 
 export const useTasksStore = create<TasksStoreState>()((set) => ({
+  lastId: 1,
   tasks: {
     todo: [
       {
@@ -28,4 +34,19 @@ export const useTasksStore = create<TasksStoreState>()((set) => ({
     inReview: [],
     done: [],
   },
+  addNewTask: (taskContent, taskState) =>
+    set(({ tasks, lastId }) => {
+      const newTask: TaskContent = {
+        ...taskContent,
+        id: lastId + 1,
+      };
+
+      return {
+        lastId: lastId + 1,
+        tasks: {
+          ...tasks,
+          [taskState]: [...tasks[taskState], newTask],
+        },
+      };
+    }),
 }));

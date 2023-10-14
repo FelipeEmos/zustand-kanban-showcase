@@ -22,7 +22,7 @@ import {
 } from "src/components/ui/select";
 import { Textarea } from "./ui/textarea";
 import { type ChangeEventHandler, useCallback, useState } from "react";
-import { type TaskState, zodTaskState } from "~/store/tasksStore";
+import { type TaskState, zodTaskState, useTasksStore } from "~/store/tasksStore";
 
 // ToImprove: Use a proper Form Lib like React Hook Form
 const useForm = () => {
@@ -44,13 +44,17 @@ const useForm = () => {
     }
   }, []);
 
+  const addNewTask = useTasksStore((state) => state.addNewTask);
+
   const onSubmit = useCallback(() => {
-    console.log({
-      title,
-      description,
+    addNewTask(
+      {
+        title,
+        description,
+      },
       taskState,
-    });
-  }, [description, taskState, title]);
+    );
+  }, [addNewTask, description, taskState, title]);
 
   return {
     title,
