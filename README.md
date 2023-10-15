@@ -1,6 +1,7 @@
 # Zustand Kanban Showcase
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+🚀 Check out the project running in this link:
+https://zustand-kanban-showcase-felipeemos.vercel.app/
 
 ## What's this project?
 
@@ -43,12 +44,16 @@ pnpm dev
 - In a real project with Backend, how should your state management go?
   - Zustand is meant to be used for managing Client State... your Backend state is the real source of truth and whenever possible you should go with React Query. Be mindful that React Query has a wonderful cache implementation and calling the same query in a lot of places in your app is not inefficient... it's meant to be that way. Also, in case you are using the T3 Stack, it's even better cus it's already set up for you with tRPC 🧑‍🍳 yummy!
 
+## Stack
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+
 To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
 - [Documentation](https://create.t3.gg/)
 - [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
 You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+
 
 ## How do I deploy this?
 
