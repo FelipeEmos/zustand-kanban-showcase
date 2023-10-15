@@ -64,6 +64,10 @@ export const useTasksStore = create<TasksStoreState>()((set) => ({
     }),
   editTaskState: (taskId, taskState, newState) =>
     set(({ tasks }) => {
+      if(taskState === newState) {
+        return {};
+      }
+
       const selectedTask = tasks[taskState].find((t) => t.id === taskId);
       if (!selectedTask) {
         return {};
