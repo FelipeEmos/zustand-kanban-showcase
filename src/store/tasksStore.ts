@@ -11,6 +11,13 @@ export const taskStates = ["todo", "inProgress", "inReview", "done"] as const;
 export const zodTaskState = z.enum(taskStates);
 export type TaskState = z.infer<typeof zodTaskState>;
 
+export const stateTitle: Record<TaskState, string> = {
+  todo: "Todo",
+  inProgress: "In Progress",
+  inReview: "In Review",
+  done: "Done",
+};
+
 interface TasksStoreState {
   lastId: number;
   tasks: Record<TaskState, TaskContent[]>;

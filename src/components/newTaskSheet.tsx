@@ -22,7 +22,13 @@ import {
 } from "src/components/ui/select";
 import { Textarea } from "./ui/textarea";
 import { type ChangeEventHandler, useCallback, useState } from "react";
-import { type TaskState, zodTaskState, useTasksStore } from "~/store/tasksStore";
+import {
+  type TaskState,
+  zodTaskState,
+  useTasksStore,
+  taskStates,
+  stateTitle,
+} from "~/store/tasksStore";
 
 // ToImprove: Use a proper Form Lib like React Hook Form
 const useForm = () => {
@@ -123,10 +129,11 @@ export const NewTaskSheet = (): JSX.Element => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Select State</SelectLabel>
-                  <SelectItem value="todo">Todo</SelectItem>
-                  <SelectItem value="inProgress">In Progress</SelectItem>
-                  <SelectItem value="inReview">In Review</SelectItem>
-                  <SelectItem value="done">Done</SelectItem>
+                  {taskStates.map((state) => (
+                    <SelectItem key={state} value={state}>
+                      {stateTitle[state]}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>

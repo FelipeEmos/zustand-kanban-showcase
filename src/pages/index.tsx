@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { NewTaskSheet } from "~/components/newTaskSheet";
 import { TaskColumn } from "~/components/taskColumn";
+import { stateTitle, taskStates } from "~/store/tasksStore";
 
 export default function Home() {
   return (
@@ -16,10 +17,13 @@ export default function Home() {
             <NewTaskSheet />
           </div>
           <div className="flex flex-row gap-4">
-            <TaskColumn title="Todo" taskState="todo" />
-            <TaskColumn title="In Progress" taskState="inProgress" />
-            <TaskColumn title="In Review" taskState="inReview" />
-            <TaskColumn title="Done" taskState="done" />
+            {taskStates.map((state) => (
+              <TaskColumn
+                key={state}
+                taskState={state}
+                title={stateTitle[state]}
+              />
+            ))}
           </div>
         </div>
       </main>
