@@ -23,11 +23,7 @@ export const TaskColumn = ({
         <Separator className="mt-4" />
       </div>
       {tasks.map((task) => (
-        <Task
-          key={task.id}
-          title={task.title}
-          description={task.description}
-        />
+        <Task key={task.id} taskContent={task} taskState={taskState} />
       ))}
     </div>
   );

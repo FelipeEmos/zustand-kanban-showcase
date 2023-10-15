@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { z } from "zod";
 
-interface TaskContent {
+export interface TaskContent {
   id: number;
   title: string;
   description?: string | undefined;
@@ -25,6 +25,12 @@ interface TasksStoreState {
     taskContent: Omit<TaskContent, "id">,
     taskState: TaskState,
   ) => void;
+  editTaskState: (
+    taskId: number,
+    taskState: TaskState,
+    newState: TaskState,
+  ) => void;
+  deleteTask: (taskId: number, taskState: TaskState) => void;
 }
 
 export const useTasksStore = create<TasksStoreState>()((set) => ({
@@ -56,4 +62,26 @@ export const useTasksStore = create<TasksStoreState>()((set) => ({
         },
       };
     }),
+  editTaskState: (taskId, taskState, newState) =>
+    set(({ tasks }) => {
+      const selectedTask = tasks[taskState].find((t) => t.id === taskId);
+      if (!selectedTask) {
+        return {};
+      }
+
+      return {
+        tasks: {
+          ...tasks,
+          [taskState]: tasks[taskState].filter((t) => t.id !== taskId),
+          [newState]: [...tasks[newState], selectedTask],
+        },
+      };
+    }),
+  deleteTask: (taskId, taskState) =>
+    set(({ tasks }) => ({
+      tasks: {
+        ...tasks,
+        [taskState]: tasks[taskState].filter((t) => t.id !== taskId),
+      },
+    })),
 }));
