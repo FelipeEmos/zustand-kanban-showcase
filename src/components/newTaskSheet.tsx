@@ -60,6 +60,9 @@ const useForm = () => {
       },
       taskState,
     );
+    setTaskState("todo");
+    setTitle("Untitled Task");
+    setDescription(undefined);
   }, [addNewTask, description, taskState, title]);
 
   return {
